@@ -1,12 +1,24 @@
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:sloth_chat/sloth_chat.dart';
+import 'package:flutter/material.dart';
 
 void main() {
-  test('adds one to input values', () {
-    final calculator = Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
-  });
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'SlothChatDemo',
+      home: Scaffold(
+        body: Container(),
+      ),
+    );
+  }
 }
