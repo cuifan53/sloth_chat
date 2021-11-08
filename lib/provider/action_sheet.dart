@@ -35,6 +35,7 @@ class ActionSheetProvider extends State<StatefulWidget>
 
   animationForward() {
     if (!isExpanded) {
+      EventBusC().bus.fire(MessageListScrollEvent(toBottom: true));
       animationController.forward();
     }
   }

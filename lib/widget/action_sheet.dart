@@ -102,17 +102,14 @@ class ActionSheet extends StatelessWidget {
   }
 
   _defaultOnTapImageButton() async {
-    List<Media>? res = await ImagesPicker.pick(
-      count: actionSheetOption.defaultMaxImageCount!,
-      pickType: PickType.image,
-    );
+    List<Media> res = await ImagePickers.pickerPaths(selectCount: 9);
     if (actionSheetOption.onDefaultImageCompleted != null) {
       actionSheetOption.onDefaultImageCompleted!.call(res);
     }
   }
 
   _defaultOnTapCameraButton() async {
-    List<Media>? res = await ImagesPicker.openCamera();
+    Media? res = await ImagePickers.openCamera();
     if (actionSheetOption.onDefaultCameraCompleted != null) {
       actionSheetOption.onDefaultCameraCompleted!.call(res);
     }

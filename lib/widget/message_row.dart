@@ -222,6 +222,7 @@ class MessageRow extends StatelessWidget {
         builder: (context) => ImageView(
           imageMessages: imageMessages,
           initialPage: initialPage,
+          onDefaultTapImageDownload: messageRowOption.onDefaultTapImageDownload,
         ),
       ),
     );

@@ -15,6 +15,36 @@ class MessageList extends StatefulWidget {
 }
 
 class _MessageListState extends State<MessageList> {
+  StreamSubscription? _ss;
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  initState() {
+    super.initState();
+
+    _ss = EventBusC().bus.on<MessageListScrollEvent>().listen((event) {
+      if (event.toBottom) {
+        _scrollController.animateTo(
+          widget.messageListOption.reverse
+              ? 0
+              : _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
+  }
+
+  @override
+  dispose() {
+    if (_ss != null) {
+      _ss!.cancel();
+      _ss = null;
+    }
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     MessageListProvider messageListProvider =
@@ -46,6 +76,8 @@ class _MessageListState extends State<MessageList> {
       },
       child: ListView.builder(
         shrinkWrap: true,
+        reverse: widget.messageListOption.reverse,
+        controller: _scrollController,
         itemCount: messageList.length,
         itemBuilder: (context, index) => messageList[index],
       ),

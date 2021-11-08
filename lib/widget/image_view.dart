@@ -3,10 +3,13 @@ part of sloth_chat;
 class ImageView extends StatelessWidget {
   final List<ChatMessage> imageMessages;
   final int initialPage;
+  final Function(ChatMessage message)? onDefaultTapImageDownload;
+
   const ImageView({
     Key? key,
     required this.imageMessages,
     required this.initialPage,
+    this.onDefaultTapImageDownload,
   }) : super(key: key);
 
   @override
@@ -46,14 +49,11 @@ class ImageView extends StatelessWidget {
             bottom: 100 * rpx,
             right: 100 * rpx,
             child: GestureDetector(
-              onTap: () async {
+              onTap: () {
                 ChatMessage message = imageMessages[_currentPage];
-                if (message.imageLocation == MessageImageLocation.file) {
-                  await ImagesPicker.saveImageToAlbum(
-                    File.fromUri(Uri.file(message.image!)),
-                  );
+                if (onDefaultTapImageDownload != null) {
+                  onDefaultTapImageDownload!.call(message);
                 }
-                // todo 网络图片先下载再保存到相册
               },
               child: Container(
                 padding: EdgeInsets.all(10 * rpx),

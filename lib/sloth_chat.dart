@@ -5,14 +5,17 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:ui' as ui show window;
 
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_parsed_text/flutter_parsed_text.dart';
-import 'package:images_picker/images_picker.dart';
+import 'package:image_pickers/image_pickers.dart';
 import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:provider/provider.dart';
 
+part './event/bus.dart';
+part './event/message_list_scroll.dart';
 part './model/action_sheet_option.dart';
 part './model/chat_message.dart';
 part './model/chat_user.dart';
@@ -22,26 +25,12 @@ part './model/message_row_option.dart';
 part './provider/action_sheet.dart';
 part './provider/current_user.dart';
 part './provider/message_list.dart';
+part './util/util.dart';
 part './widget/action_sheet.dart';
 part './widget/image_view.dart';
 part './widget/input_bar.dart';
 part './widget/message_list.dart';
 part './widget/message_row.dart';
-
-// rpx宽高比例适配
-double rpx = MediaQueryData.fromWindow(ui.window).size.width / 750;
-
-// 隐藏键盘
-hideKeyboard(BuildContext context) {
-  FocusScope.of(context).requestFocus(FocusNode());
-}
-
-// 隐藏动作面板
-hideActionSheet(BuildContext context) {
-  ActionSheetProvider actionSheetProvider =
-      Provider.of<ActionSheetProvider>(context, listen: false);
-  actionSheetProvider.animationReverse();
-}
 
 class SlothChat extends StatefulWidget {
   // 当前用户

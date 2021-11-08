@@ -36,6 +36,7 @@ class _InputBarState extends State<InputBar> {
       // 点击输入框时先隐藏actionSheet
       if (_textFocusNode.hasFocus) {
         actionSheetProvider.animationReverse();
+        EventBusC().bus.fire(MessageListScrollEvent(toBottom: true));
       }
     });
   }

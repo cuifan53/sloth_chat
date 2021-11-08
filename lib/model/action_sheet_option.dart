@@ -13,8 +13,8 @@ class ActionSheetOption {
   // 默认相册最大选择数量
   int? defaultMaxImageCount;
 
-  // 拍照默认方法结果回调
-  Function(List<Media>? medias)? onDefaultImageCompleted;
+  // 默认相册方法结果回调
+  Function(List<Media> medias)? onDefaultImageCompleted;
 
   // 是否显示拍照按钮
   bool showCameraButton;
@@ -22,8 +22,8 @@ class ActionSheetOption {
   // 点击拍照按钮回调
   VoidCallback? onTapCameraButton;
 
-  // 拍照默认方法结果回调
-  Function(List<Media>? medias)? onDefaultCameraCompleted;
+  // 默认拍照方法结果回调
+  Function(Media? media)? onDefaultCameraCompleted;
 
   // 是否显示文件按钮
   bool showFileButton;

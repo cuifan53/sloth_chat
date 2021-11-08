@@ -22,6 +22,9 @@ class MessageRowOption {
   // 点击图片消息回调
   final Function(ChatMessage message)? onTapImageMessage;
 
+  // 点击图片消息回调
+  final Function(ChatMessage message)? onDefaultTapImageDownload;
+
   // 长按图片消息回调
   final Function(ChatMessage message)? onLongPressImageMessage;
 
@@ -33,6 +36,7 @@ class MessageRowOption {
     this.onLongPressTextMessage,
     this.onDoubleTapTextMessage,
     this.onTapImageMessage,
+    this.onDefaultTapImageDownload,
     this.onLongPressImageMessage,
   });
 }
