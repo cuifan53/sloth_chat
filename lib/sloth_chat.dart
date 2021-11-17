@@ -61,7 +61,7 @@ class SlothChat extends StatefulWidget {
     Key? key,
     required this.currentUser,
     required this.messages,
-    this.backgroundColor = const Color(0xFFF0F0F0),
+    this.backgroundColor,
     this.actionSheetMaxHeight,
     this.messageListOption,
     this.messageRowOption,
@@ -76,36 +76,47 @@ class SlothChat extends StatefulWidget {
 class _SlothChatState extends State<SlothChat> {
   @override
   Widget build(BuildContext context) {
+    Color _backgroundColor = widget.backgroundColor ?? const Color(0xFFF0F0F0);
+    double _actionSheetMaxHeight = widget.actionSheetMaxHeight ?? 480 * rpx;
+    MessageListOption _messageListOption =
+        widget.messageListOption ?? MessageListOption();
+    MessageRowOption _messageRowOption =
+        widget.messageRowOption ?? MessageRowOption();
+    InputBarOption _inputBarOption = widget.inputBarOption ?? InputBarOption();
+    ActionSheetOption _actionSheetOption =
+        widget.actionSheetOption ?? ActionSheetOption();
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (_) => CurrentUserProvider(currentUser: widget.currentUser),
         ),
         ChangeNotifierProvider(
-          create: (_) => MessageListProvider(messages: widget.messages),
+          create: (_) => MessageListProvider(
+            messages: widget.messages,
+            reverse: _messageListOption.reverse,
+          ),
         ),
         ChangeNotifierProvider(
           create: (_) => ActionSheetProvider(
             context,
-            maxHeight: widget.actionSheetMaxHeight ?? 480 * rpx,
+            maxHeight: _actionSheetMaxHeight,
           ),
         ),
       ],
       child: Container(
-        color: widget.backgroundColor,
+        color: _backgroundColor,
         child: Column(
           children: [
             Expanded(
               child: MessageList(
-                messageListOption:
-                    widget.messageListOption ?? MessageListOption(),
-                messageRowOption: widget.messageRowOption ?? MessageRowOption(),
+                messageListOption: _messageListOption,
+                messageRowOption: _messageRowOption,
               ),
             ),
             InputBar(
-              inputBarOption: widget.inputBarOption ?? InputBarOption(),
-              actionSheetOption:
-                  widget.actionSheetOption ?? ActionSheetOption(),
+              inputBarOption: _inputBarOption,
+              actionSheetOption: _actionSheetOption,
             ),
           ],
         ),

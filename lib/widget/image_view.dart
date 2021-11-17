@@ -14,6 +14,11 @@ class ImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    imageMessages.forEach((element) {
+      print(element.image);
+    });
+    print(initialPage);
+
     PageController _pageController = PageController(initialPage: initialPage);
     int _currentPage = initialPage;
 
